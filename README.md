@@ -11,10 +11,19 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 ~/.dotfiles/
 ├── bash/
 │   └── .bashrc                  -> ~/.bashrc
-└── git/
+├── git/
+│   └── .config/
+│       └── git/
+│           └── config           -> ~/.config/git/config
+└── nvim/
     └── .config/
-        └── git/
-            └── config           -> ~/.config/git/config
+        └── nvim/                -> ~/.config/nvim
+            ├── init.lua
+            ├── lazy-lock.json
+            ├── after/queries/...
+            └── lua/
+                ├── config/...
+                └── plugins/...
 ```
 
 ## Usage
@@ -64,6 +73,18 @@ loudly until installed.
 | `bash` | [ble.sh](https://github.com/akinomyoga/ble.sh) | optional | autosuggestions + syntax highlighting |
 | `git` | `nvim` | yes | `core.editor`, `diff.tool`, `merge.tool` |
 | `git` | [`delta`](https://github.com/dandavison/delta) | yes | `pager.*` and `interactive.diffFilter` |
+| `nvim` | `nvim` | yes | the editor itself |
+| `nvim` | `git` | yes | lazy.nvim and mason.nvim both shell out to it |
+| `nvim` | a C compiler / `make` | yes | `:TSUpdate` treesitter parser builds, telescope-fzf-native's native build |
+| `nvim` | `cargo`/`rustc` | yes | blink.cmp's `cargo build --release` |
+| `nvim` | Node.js/npm | yes | most mason-installed LSP servers are npm packages |
+| `nvim` | Python3 + pip | yes | the `black` formatter, installed by mason |
+| `nvim` | `curl`/`wget`, `unzip`, `tar`, `gzip` | yes | mason's own download prerequisites (present on a base Arch/Omarchy install) |
+
+Everything else nvim needs (LSP servers, remaining formatters) is self-installed by
+mason.nvim on first launch — see `lua/plugins/mason.lua`. Theming follows Omarchy's
+system theme automatically when present (`lua/plugins/theme.lua`); it falls back to a
+bundled catppuccin colorscheme when it isn't (e.g. on a non-Omarchy machine).
 
 ## Adding a new config
 
