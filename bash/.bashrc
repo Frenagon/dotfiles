@@ -65,8 +65,6 @@ alias lt='eza --tree'
 alias vi=nvim
 alias vim=nvim
 
-# Optional: bash has no built-in equivalent of zsh-autosuggestions /
-# zsh-syntax-highlighting. The closest match is ble.sh, which provides both:
-#   https://github.com/akinomyoga/ble.sh
-# Install it, then uncomment:
-# [[ -f ~/.local/share/blesh/ble.sh ]] && source ~/.local/share/blesh/ble.sh
+### ble.sh: bash equivalent of zsh-autosuggestions + zsh-syntax-highlighting ###
+# https://github.com/akinomyoga/ble.sh — must be sourced last in .bashrc.
+[[ -f ~/.local/share/blesh/ble.sh ]] && source ~/.local/share/blesh/ble.sh

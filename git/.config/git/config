@@ -1,0 +1,38 @@
+[alias]
+	undo = "reset --soft HEAD^"
+
+[core]
+	editor = "nvim"
+
+[delta]
+	line-numbers = true
+	tabs = 2
+
+[diff]
+	tool = "nvimdiff"
+
+[fetch]
+	prune = true
+
+[init]
+	defaultBranch = "main"
+
+[interactive]
+	diffFilter = "delta --color-only"
+
+[merge]
+	tool = "nvimdiff"
+
+[pager]
+	blame = "delta"
+	diff = "delta"
+	log = "delta"
+	show = "delta"
+
+[push]
+	autoSetupRemote = true
+	default = "current"
+
+[user]
+	email = "frenagon@gmail.com"
+	name = "Francisco Aceves"
