@@ -11,6 +11,12 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 ~/.dotfiles/
 ├── bash/
 │   └── .bashrc                  -> ~/.bashrc
+├── tmux/
+│   └── .tmux.conf               -> ~/.tmux.conf
+├── bat/
+│   └── .config/
+│       └── bat/
+│           └── config           -> ~/.config/bat/config
 ├── git/
 │   └── .config/
 │       └── git/
@@ -84,6 +90,8 @@ loudly until installed.
 | --- | --- | --- | --- |
 | `bash` | `bash` | yes | the shell itself |
 | `bash` | `tmux` | optional | auto-attached on interactive shell start |
+| `tmux` | [TPM](https://github.com/tmux-plugins/tpm) | yes | plugin manager — see the note in `tmux/.tmux.conf` for one-time setup |
+| `bat` | `bat` | yes | the tool itself |
 | `bash` | `starship` | optional | prompt |
 | `bash` | `zoxide` | optional | smarter `cd` |
 | `bash` | `direnv` | optional | per-directory env loading |

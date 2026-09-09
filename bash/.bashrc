@@ -59,7 +59,7 @@ lg() {
 
 ### Aliases ###
 alias ai=claude
-alias eza='eza --icons auto --sort=ext --sort=name --group-directories-first'
+alias eza='eza --icons auto --git --sort=ext --sort=name --group-directories-first'
 alias la='eza -a'
 alias ll='eza -l'
 alias lla='eza -la'
