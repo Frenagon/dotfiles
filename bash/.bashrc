@@ -12,13 +12,6 @@
 # If not running interactively, don't do anything else (leave this above the rc source)
 [[ $- != *i* ]] && return
 
-# Auto-attach tmux for interactive shells. Done before sourcing Omarchy's rc so
-# the rc chain isn't loaded twice when we re-exec into tmux (panes re-enter this
-# file with $TMUX set and fall through to the rc source below).
-if [ -z "$TMUX" ] && [ -n "$PS1" ] && command -v tmux >/dev/null 2>&1; then
-  exec tmux new-session -A -s 0-terminal
-fi
-
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them below!)
 source "$OMARCHY_PATH/default/bash/rc"
