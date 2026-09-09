@@ -1,5 +1,18 @@
 [alias]
+	br = branch
+	ci = commit
+	co = checkout
+	st = status
 	undo = "reset --soft HEAD^"
+
+[branch]
+	sort = -committerdate
+
+[column]
+	ui = auto
+
+[commit]
+	verbose = true
 
 [core]
 	editor = "nvim"
@@ -9,6 +22,9 @@
 	tabs = 2
 
 [diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
 	tool = "nvimdiff"
 
 [fetch]
@@ -29,9 +45,19 @@
 	log = "delta"
 	show = "delta"
 
+[pull]
+	rebase = true
+
 [push]
 	autoSetupRemote = true
 	default = "current"
+
+[rerere]
+	autoupdate = true
+	enabled = true
+
+[tag]
+	sort = -version:refname
 
 [user]
 	email = "frenagon@gmail.com"
