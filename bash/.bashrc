@@ -58,6 +58,7 @@ alias vim=nvim
 # (defined as `ls -a` / `lt -a`) inherit them too.
 alias eza='eza --icons auto --git --sort=name --group-directories-first'
 alias ls=eza
+alias l='ls -lah'
 alias la='eza -a'
 alias ll='eza -l'
 alias lla='eza -la'
