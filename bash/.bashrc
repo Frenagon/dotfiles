@@ -56,7 +56,7 @@ alias vim=nvim
 # eza — deliberately overrides Omarchy's `ls`/`lt`. `ls`/`lt` expand through the
 # `eza` alias so the base flags apply to both, and Omarchy's own `lsa`/`lta`
 # (defined as `ls -a` / `lt -a`) inherit them too.
-alias eza='eza --icons auto --git --sort=ext --group-directories-first'
+alias eza='eza --icons auto --git --sort=name --group-directories-first'
 alias ls=eza
 alias la='eza -a'
 alias ll='eza -l'
