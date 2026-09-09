@@ -1,9 +1,9 @@
 # Based on Omarchy's default (/usr/share/omarchy/config/starship.toml), with:
 #  - a multiline prompt: the command line sits on its own row, below the info
-#  - starship's connective words kept — "on" before the branch, "via" before a
-#    language/runtime, "took" for a slow command
-#  - a Nerd Font glyph on the git branch (Omarchy ships a Nerd Font); nothing
-#    else gets an added icon (language modules keep their own default glyph)
+#  - starship's connective words restored ("on" / "via" / "took") — Omarchy's
+#    compact single-line format had stripped them
+#  - a Nerd Font glyph on the git branch (Omarchy ships a Nerd Font)
+# Colours are left at starship's defaults.
 
 add_newline = true
 command_timeout = 200
@@ -19,24 +19,16 @@ $lua\
 $cmd_duration
 $character"""
 
-[character]
-error_symbol = "[✗](bold cyan)"
-success_symbol = "[❯](bold cyan)"
-
 [directory]
 truncation_length = 2
 truncation_symbol = "…/"
-repo_root_style = "bold cyan"
-repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
 
 [git_branch]
 format = "on [$symbol$branch]($style) "
-symbol = " "
-style = "italic cyan"
+symbol = " "
 
 [git_status]
-format     = '[$all_status]($style)'
-style      = "cyan"
+format     = '([$all_status$ahead_behind]($style) )'
 ahead      = "⇡${count} "
 diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
 behind     = "⇣${count} "
@@ -48,21 +40,3 @@ stashed    = ""
 staged     = ""
 renamed    = ""
 deleted    = ""
-
-[nodejs]
-style = "cyan"
-
-[python]
-style = "cyan"
-
-[rust]
-style = "cyan"
-
-[golang]
-style = "cyan"
-
-[lua]
-style = "cyan"
-
-[cmd_duration]
-style = "cyan"
