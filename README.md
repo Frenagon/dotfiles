@@ -11,6 +11,10 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 ~/.dotfiles/
 ├── bash/
 │   └── .bashrc                  -> ~/.bashrc
+├── blesh/
+│   └── .config/
+│       └── blesh/
+│           └── init.sh          -> ~/.config/blesh/init.sh
 ├── tmux/
 │   └── .tmux.conf               -> ~/.tmux.conf
 ├── bat/
@@ -96,10 +100,11 @@ loudly until installed.
 | `bash` | `zoxide` | optional | smarter `cd` |
 | `bash` | `direnv` | optional | per-directory env loading |
 | `bash` | `lazygit` | optional | used by the `lg` function |
-| `bash` | `eza` | optional | powers the `ls`/`la`/`ll`/`lla`/`lt` aliases |
+| `bash` | `eza` | optional | powers the `l`/`ls`/`la`/`ll`/`lla`/`lt` aliases |
 | `bash` | `nvim` | optional | powers the `vi`/`vim` aliases |
 | `bash` | `claude` (Claude Code CLI) | optional | powers the `ai` alias |
-| `bash` | [ble.sh](https://github.com/akinomyoga/ble.sh) | optional | autosuggestions + syntax highlighting |
+| `bash` | [ble.sh](https://github.com/akinomyoga/ble.sh) | optional | autosuggestions + syntax highlighting; tuned by the `blesh` package |
+| `blesh` | [ble.sh](https://github.com/akinomyoga/ble.sh) | yes | `init.sh` is a no-op without it |
 | `git` | `nvim` | yes | `core.editor`, `diff.tool`, `merge.tool` |
 | `git` | [`delta`](https://github.com/dandavison/delta) | yes | `pager.*` and `interactive.diffFilter` |
 | `nvim` | `nvim` | yes | the editor itself |
@@ -115,6 +120,22 @@ Everything else nvim needs (LSP servers, remaining formatters) is self-installed
 mason.nvim on first launch — see `lua/plugins/mason.lua`. Theming follows Omarchy's
 system theme automatically when present (`lua/plugins/theme.lua`); it falls back to a
 bundled catppuccin colorscheme when it isn't (e.g. on a non-Omarchy machine).
+
+**bash note:** `.bashrc` is Omarchy's stock `.bashrc` (its `env-bootstrap` +
+`default/bash/rc` chain stay the source of truth for history, prompt, zoxide
+and completions) with a personal section appended for what Omarchy doesn't
+ship: the `~/.local/scripts` PATH entry, cross-pane history sharing, the
+`direnv` hook, `lg()`, the `ai`/`vi`/`vim` aliases, and ble.sh. The eza
+aliases (`l`/`ls`/`la`/`ll`/`lla`/`lt`) deliberately override Omarchy's own
+`ls`/`lt`.
+
+**blesh note:** `blesh/.config/blesh/init.sh` is auto-loaded by ble.sh (no
+`~/.blerc` needed). It's purely a palette/behaviour tweak to make ble.sh's
+autosuggestions + completion menu read like the zsh setup this config was
+converted from (zsh-autosuggestions ghost text, zsh-syntax-highlighting's
+green/yellow scheme, `menu select`-style highlighting). Colours use palette
+indices so they follow the terminal theme. Harmless without ble.sh — it's
+just never sourced.
 
 **hypr note:** targets Omarchy's "Quattro" (v4.0.0+) Hyprland setup, where
 `~/.config/hypr/{hyprland,bindings,monitors,input,looknfeel,autostart}.lua`
