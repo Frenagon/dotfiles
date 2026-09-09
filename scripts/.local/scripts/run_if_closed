@@ -1,0 +1,156 @@
+#! /usr/bin/env bash
+# run_if_closed
+# Runs a command only if no Hyprland client matches the given filters.
+# Requires: hyprctl, jq
+set -euo pipefail
+
+CLASS=""
+TITLE=""
+WORKSPACE=""
+REGEX="0"
+
+usage() {
+  cat <<EOF
+Usage:
+  $(basename "$0") [--class CLASS] [--title TITLE] [--workspace ID|NAME] [--regex] -- command [args...]
+
+Options:
+  --class CLASS        Match by client class (e.g., Firefox, Alacritty).
+  --title TITLE        Match by window title.
+  --workspace ID|NAME  Match by workspace (numeric ID or name).
+  --regex              Treat CLASS/TITLE/WORKSPACE as regular expressions.
+  -h, --help           Show this help.
+
+Notes:
+  • If no filters are provided, the command always runs.
+  • "class" matches either .class or .initialClass in Hyprland's JSON.
+  • Workspace can be a numeric ID (e.g., 1) or a named workspace (e.g., "dev").
+EOF
+}
+
+# --- parse args until the `--` that separates filters from the command ---
+if [[ $# -eq 0 ]]; then
+  usage
+  exit 1
+fi
+
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+  --class)
+    CLASS="${2-}"
+    shift 2
+    ;;
+  --title)
+    TITLE="${2-}"
+    shift 2
+    ;;
+  --workspace)
+    WORKSPACE="${2-}"
+    shift 2
+    ;;
+  --regex)
+    REGEX="1"
+    shift
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  --)
+    shift
+    break
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage
+    exit 1
+    ;;
+  esac
+done
+
+# Remaining args form the command to run
+if [[ $# -eq 0 ]]; then
+  echo "Error: no command provided. Use -- to separate filters from the command." >&2
+  usage
+  exit 1
+fi
+
+# Build jq filter dynamically
+jq_tests=()
+
+# Helper: field for class (support both .class and .initialClass)
+class_expr='(.class // .initialClass // "")'
+title_expr='(.title // "")'
+ws_id_expr='.workspace.id'
+ws_name_expr='(.workspace.name // (.workspace.id|tostring))'
+
+if [[ -n "$CLASS" ]]; then
+  if [[ "$REGEX" == "1" ]]; then
+    jq_tests+=("$class_expr | test(\$class)")
+  else
+    jq_tests+=("$class_expr == \$class")
+  fi
+fi
+
+if [[ -n "$TITLE" ]]; then
+  if [[ "$REGEX" == "1" ]]; then
+    jq_tests+=("$title_expr | test(\$title)")
+  else
+    jq_tests+=("$title_expr == \$title")
+  fi
+fi
+
+if [[ -n "$WORKSPACE" ]]; then
+  # numeric?
+  if [[ "$WORKSPACE" =~ ^-?[0-9]+$ ]]; then
+    if [[ "$REGEX" == "1" ]]; then
+      # numeric regex is odd, but allow it: convert id to string and test
+      jq_tests+=("(($ws_id_expr|tostring)) | test(\$ws)")
+    else
+      jq_tests+=("$ws_id_expr == \$wsnum")
+    fi
+  else
+    if [[ "$REGEX" == "1" ]]; then
+      jq_tests+=("$ws_name_expr | test(\$ws)")
+    else
+      jq_tests+=("$ws_name_expr == \$ws")
+    fi
+  fi
+fi
+
+# Combine tests
+jq_selector='.'
+if ((${#jq_tests[@]} > 0)); then
+  jq_selector="select( (${jq_tests[0]}"')'
+  for ((i = 1; i < ${#jq_tests[@]}; i++)); do
+    jq_selector+=" and (${jq_tests[$i]})"
+  done
+  jq_selector+=" )"
+else
+  # no filters -> match nothing; we'll treat that as "no match found" so command runs
+  jq_selector='empty'
+fi
+
+# Prepare jq args
+jq_args=(--arg class "${CLASS}" --arg title "${TITLE}" --arg ws "${WORKSPACE}")
+# numeric workspace value when needed
+if [[ -n "$WORKSPACE" && "$WORKSPACE" =~ ^-?[0-9]+$ && "$REGEX" != "1" ]]; then
+  jq_args+=(--argjson wsnum "$WORKSPACE")
+fi
+
+# Query Hyprland clients
+clients_json="$(hyprctl clients -j 2>/dev/null || true)"
+
+# If hyprctl fails or returns empty, assume no clients match
+match_count=0
+if [[ -n "$clients_json" ]]; then
+  match_count="$(printf '%s' "$clients_json" | jq "${jq_args[@]}" '[ .[] | '"$jq_selector"' ] | length')"
+fi
+
+if [[ "$match_count" -eq 0 ]]; then
+  # No matching client: run the command
+  exec "$@"
+else
+  # Matching client exists: do nothing, exit success
+  exit 0
+fi

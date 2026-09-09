@@ -24,6 +24,9 @@ shopt -s cmdhist
 # reload, rather than only on shell exit.
 PROMPT_COMMAND="history -a; history -c; history -r${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 
+### Personal helper scripts (see ~/.dotfiles/scripts) ###
+export PATH="$HOME/.local/scripts:$PATH"
+
 ### Auto-attach tmux for interactive shells ###
 if [ -z "$TMUX" ] && [ -n "$PS1" ] && command -v tmux >/dev/null 2>&1; then
   exec tmux new-session -A -s 0-terminal

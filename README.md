@@ -18,15 +18,26 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 ├── ssh/
 │   └── .ssh/
 │       └── config               -> ~/.ssh/config
-└── nvim/
-    └── .config/
-        └── nvim/                -> ~/.config/nvim
-            ├── init.lua
-            ├── lazy-lock.json
-            ├── after/queries/...
-            └── lua/
-                ├── config/...
-                └── plugins/...
+├── nvim/
+│   └── .config/
+│       └── nvim/                -> ~/.config/nvim
+│           ├── init.lua
+│           ├── lazy-lock.json
+│           ├── after/queries/...
+│           └── lua/
+│               ├── config/...
+│               └── plugins/...
+├── hypr/
+│   └── .config/
+│       └── hypr/                -> ~/.config/hypr
+│           ├── hyprland.lua
+│           ├── monitors.lua, input.lua, bindings.lua, rules.lua
+│           ├── autostart.lua, variables.lua
+│           └── programs/obsidian.lua
+└── scripts/
+    └── .local/
+        └── scripts/
+            └── run_if_closed    -> ~/.local/scripts/run_if_closed
 ```
 
 ## Usage
@@ -83,11 +94,24 @@ loudly until installed.
 | `nvim` | Node.js/npm | yes | most mason-installed LSP servers are npm packages |
 | `nvim` | Python3 + pip | yes | the `black` formatter, installed by mason |
 | `nvim` | `curl`/`wget`, `unzip`, `tar`, `gzip` | yes | mason's own download prerequisites (present on a base Arch/Omarchy install) |
+| `scripts` | `jq` | yes | used by `run_if_closed` to query `hyprctl clients -j` |
 
 Everything else nvim needs (LSP servers, remaining formatters) is self-installed by
 mason.nvim on first launch — see `lua/plugins/mason.lua`. Theming follows Omarchy's
 system theme automatically when present (`lua/plugins/theme.lua`); it falls back to a
 bundled catppuccin colorscheme when it isn't (e.g. on a non-Omarchy machine).
+
+**hypr note:** targets Omarchy's "Quattro" (v4.0.0+) Hyprland setup, where
+`~/.config/hypr/{hyprland,bindings,monitors,input,looknfeel,autostart}.lua`
+are Omarchy's own blessed user-override files — loaded *after* Omarchy's real
+defaults, so this package only adds personal config (monitor layout, input
+devices, app autostart, window-placement rules, one workspace-launch keybind
+pattern) on top. It deliberately does not touch or reimplement anything
+Omarchy's own shell already provides (volume/brightness/screenshot/
+clipboard/launcher/powermenu/lock/kb-layout/bluetooth), and ships no
+`looknfeel.lua`, leaving Omarchy's default look-and-feel untouched. Untested
+against a real Omarchy install — smoke test with `hyprctl reload` and watch
+for Lua errors after stowing.
 
 **ssh note:** this repo only tracks `~/.ssh/config` — never the private keys
 themselves. After stowing, `ssh` will refuse to use `~/.ssh` or its keys if
