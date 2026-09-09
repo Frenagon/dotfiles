@@ -171,12 +171,16 @@ this machine's caelestia "crimson" color scheme
 (`~/.nixos-config/home/window-managers/caelestia/schemes/crimson/`) —
 `plastik-genesis` (dark, from `crimson/dark.txt`), `plastik-odyssey` (light,
 from `crimson/light.txt`), and `plastik-retro` (a mid warm-gray variant not
-in the source scheme, built around the same four accent hues). Each is just
-a `colors.toml` — Omarchy's own templates generate every themed app config
-(terminal, Hyprland borders, btop, etc.) from it; see
-[docs/theming.md](https://github.com/omacom/omarchy/blob/quattro/docs/theming.md)
-for the schema. Activate with `omarchy-theme-set plastik-genesis` (or
-`-retro`/`-odyssey`) after stowing. Untested against a real Omarchy install.
+in the source scheme, built around the same four accent hues). Each carries a
+`colors.toml` (Omarchy's templates generate every themed app config —
+terminal, Hyprland borders, btop, etc. — from it; see
+[docs/theming.md](https://github.com/omacom/omarchy/blob/quattro/docs/theming.md)),
+a `backgrounds/` wallpaper, and a small `hyprland.lua` that rounds the window
+corners (`rounding = 6, rounding_power = 3`, matching Omarchy's Solitude
+theme — the stock default is square). Shipping that `hyprland.lua` makes
+theme-set skip the generated one, so it re-sets the accent border colours
+too. Activate with `omarchy-theme-set plastik-genesis` (or `-retro`/`-odyssey`)
+after stowing. Untested against a real Omarchy install.
 
 **ssh note:** this repo only tracks `~/.ssh/config` — never the private keys
 themselves. After stowing, `ssh` will refuse to use `~/.ssh` or its keys if
