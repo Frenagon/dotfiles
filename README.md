@@ -16,7 +16,9 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 │       └── blesh/
 │           └── init.sh          -> ~/.config/blesh/init.sh
 ├── tmux/
-│   └── .tmux.conf               -> ~/.tmux.conf
+│   └── .config/
+│       └── tmux/
+│           └── tmux.conf        -> ~/.config/tmux/tmux.conf
 ├── bat/
 │   └── .config/
 │       └── bat/
@@ -93,8 +95,8 @@ loudly until installed.
 | Package | Tool | Required? | Purpose |
 | --- | --- | --- | --- |
 | `bash` | `bash` | yes | the shell itself |
-| `bash` | `tmux` | optional | auto-attached on interactive shell start |
-| `tmux` | [TPM](https://github.com/tmux-plugins/tpm) | yes | plugin manager — see the note in `tmux/.tmux.conf` for one-time setup |
+| `tmux` | `tmux` | yes | 3.x, for the XDG config path |
+| `tmux` | [TPM](https://github.com/tmux-plugins/tpm) | yes | plugin manager — clone to `~/.config/tmux/plugins/tpm`; see the note at the top of `tmux/.config/tmux/tmux.conf` |
 | `bat` | `bat` | yes | the tool itself |
 | `bash` | `starship` | optional | prompt |
 | `bash` | `zoxide` | optional | smarter `cd` |
@@ -137,6 +139,16 @@ text, zsh-syntax-highlighting's green/yellow scheme, and a two-step
 steps in) with the command line left un-highlighted while the menu is open.
 Colours use palette indices so they follow the terminal theme. Harmless
 without ble.sh — it's just never sourced.
+
+**tmux note:** lives at `~/.config/tmux/tmux.conf` because tmux 3.x prefers
+that path over `~/.tmux.conf` — and Omarchy copies its own config there on a
+fresh install, so a `~/.tmux.conf` symlink would silently never load. This
+file `source-file`s Omarchy's shipped config first (keeping its terminal
+features and its large pane/window/session keybinding set) then overrides:
+prefix `C-a` (no second prefix), a bottom status bar styled from the palette,
+and TPM plugins (sensible, resurrect, continuum, agent-sidebar). TPM lives at
+`~/.config/tmux/plugins/tpm`. No shell auto-attach — start tmux yourself
+(Omarchy's `t` alias, or the tmux-launch keybinds).
 
 **hypr note:** targets Omarchy's "Quattro" (v4.0.0+) Hyprland setup, where
 `~/.config/hypr/{hyprland,bindings,monitors,input,looknfeel,autostart}.lua`
