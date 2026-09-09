@@ -22,9 +22,12 @@ source "$OMARCHY_PATH/default/bash/rc"
 export PATH="$HOME/.local/scripts:$PATH"
 
 ### History: share immediately across sessions/tmux panes. Omarchy only sets
-### histappend (write on exit); this appends after every command and reloads. ###
+### histappend (write on exit); this appends after every command and reloads.
+### Wrapped in a function that restores $? so it doesn't clobber the exit
+### status the rest of PROMPT_COMMAND (starship's prompt character) reads. ###
 shopt -s cmdhist
-PROMPT_COMMAND="history -a; history -c; history -r${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+__share_history() { local __e=$?; history -a; history -c; history -r; return $__e; }
+PROMPT_COMMAND="__share_history${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
 
 ### direnv (per-directory env loading) ###
 if command -v direnv >/dev/null 2>&1; then
