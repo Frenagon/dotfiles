@@ -15,6 +15,9 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 │   └── .config/
 │       └── blesh/
 │           └── init.sh          -> ~/.config/blesh/init.sh
+├── starship/
+│   └── .config/
+│       └── starship.toml        -> ~/.config/starship.toml
 ├── tmux/
 │   └── .config/
 │       └── tmux/
@@ -98,7 +101,9 @@ loudly until installed.
 | `tmux` | `tmux` | yes | 3.x, for the XDG config path |
 | `tmux` | [TPM](https://github.com/tmux-plugins/tpm) | yes | plugin manager — clone to `~/.config/tmux/plugins/tpm`; see the note at the top of `tmux/.config/tmux/tmux.conf` |
 | `bat` | `bat` | yes | the tool itself |
-| `bash` | `starship` | optional | prompt |
+| `bash` | `starship` | optional | prompt (Omarchy's `default/bash/init` runs `starship init`) |
+| `starship` | `starship` | yes | the prompt config is inert without it |
+| `starship` | a Nerd Font | yes | the folder / branch / lock glyphs (Omarchy's default font has one) |
 | `bash` | `zoxide` | optional | smarter `cd` |
 | `bash` | `direnv` | optional | per-directory env loading |
 | `bash` | `lazygit` | optional | used by the `lg` function |
@@ -141,6 +146,12 @@ and each path candidate shown as its last component only (it also turns
 `menu-complete-display-prefix` back off, which Omarchy's inputrc enables).
 Colours use palette indices so they follow the terminal theme. Harmless
 without ble.sh — it's just never sourced.
+
+**starship note:** `~/.config/starship.toml` replaces Omarchy's default (which
+`default/bash/init` still `starship init`s). Same modules as Omarchy's —
+directory + git — with two changes: the prompt is multiline so the command
+line sits on its own row, and directory / branch / read-only get Nerd Font
+glyphs. `cyan` follows the terminal theme.
 
 **tmux note:** lives at `~/.config/tmux/tmux.conf` because tmux 3.x prefers
 that path over `~/.tmux.conf` — and Omarchy copies its own config there on a

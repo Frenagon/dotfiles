@@ -1,0 +1,42 @@
+# Based on Omarchy's default (/usr/share/omarchy/config/starship.toml), with:
+#  - a multiline prompt: the command you type sits on its own row, below the
+#    directory / git info
+#  - folder / branch / lock glyphs (needs a Nerd Font — Omarchy ships one)
+
+add_newline = true
+command_timeout = 200
+format = """
+[$directory$git_branch$git_status]($style)
+$character"""
+
+[character]
+error_symbol = "[✗](bold cyan)"
+success_symbol = "[❯](bold cyan)"
+
+[directory]
+truncation_length = 2
+truncation_symbol = "…/"
+read_only = " "
+repo_root_style = "bold cyan"
+format = "[ ]($style)[$path]($style)[$read_only]($read_only_style) "
+repo_root_format = "[ ]($repo_root_style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "italic cyan"
+
+[git_status]
+format     = '[$all_status]($style)'
+style      = "cyan"
+ahead      = "⇡${count} "
+diverged   = "⇕⇡${ahead_count}⇣${behind_count} "
+behind     = "⇣${count} "
+conflicted = " "
+up_to_date = " "
+untracked  = "? "
+modified   = " "
+stashed    = ""
+staged     = ""
+renamed    = ""
+deleted    = ""
