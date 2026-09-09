@@ -1,48 +1,39 @@
 # ~/.bashrc
 #
-# Converted from a NixOS home-manager-generated .zshrc for use on non-Nix
-# systems (targeting a plain Omarchy install running foot). Dropped entirely:
-# Nix store paths, oh-my-zsh, zsh-autosuggestions, zsh-syntax-highlighting (no
-# direct bash equivalent short of installing ble.sh — see note at bottom),
-# the NixOS-only aliases (ndev/nfu/nrs/nrt), the caelestia OSC colour-sequence
-# loading, and kitty/ghostty shell integration (not used with foot).
+# Omarchy's stock .bashrc (env-bootstrap + the default rc chain) is the source
+# of truth for history, prompt, zoxide, completions, and the default alias/
+# function set. Everything under "Personal additions" is config Omarchy does
+# not provide — with one deliberate exception: the eza aliases below override
+# Omarchy's own `ls`/`lt` with this machine's preferred flags.
 
-# If not running interactively, don't do anything.
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# Omarchy environment (OMARCHY_PATH + PATH), needed even for non-interactive shells
+[[ -r /usr/share/omarchy/default/bash/env-bootstrap ]] && source /usr/share/omarchy/default/bash/env-bootstrap
 
-### History ###
-HISTSIZE=10000
-HISTFILESIZE=10000
-HISTFILE="$HOME/.bash_history"
-HISTCONTROL=ignoredups:ignorespace
-shopt -s histappend
-shopt -s cmdhist
-# Share history across sessions/tmux panes: append after each command, then
-# reload, rather than only on shell exit.
-PROMPT_COMMAND="history -a; history -c; history -r${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+# If not running interactively, don't do anything else (leave this above the rc source)
+[[ $- != *i* ]] && return
 
-### Personal helper scripts (see ~/.dotfiles/scripts) ###
-export PATH="$HOME/.local/scripts:$PATH"
-
-### Auto-attach tmux for interactive shells ###
+# Auto-attach tmux for interactive shells. Done before sourcing Omarchy's rc so
+# the rc chain isn't loaded twice when we re-exec into tmux (panes re-enter this
+# file with $TMUX set and fall through to the rc source below).
 if [ -z "$TMUX" ] && [ -n "$PS1" ] && command -v tmux >/dev/null 2>&1; then
   exec tmux new-session -A -s 0-terminal
 fi
 
-### Prompt ###
-if [[ $TERM != "dumb" ]] && command -v starship >/dev/null 2>&1; then
-  eval "$(starship init bash)"
-fi
+# All the default Omarchy aliases and functions
+# (don't mess with these directly, just overwrite them below!)
+source "$OMARCHY_PATH/default/bash/rc"
 
-### zoxide (smarter cd) ###
-if command -v zoxide >/dev/null 2>&1; then
-  eval "$(zoxide init bash --cmd cd)"
-fi
+######################## Personal additions ########################
 
-### direnv ###
+### Personal helper scripts (see ~/.dotfiles/scripts) ###
+export PATH="$HOME/.local/scripts:$PATH"
+
+### History: share immediately across sessions/tmux panes. Omarchy only sets
+### histappend (write on exit); this appends after every command and reloads. ###
+shopt -s cmdhist
+PROMPT_COMMAND="history -a; history -c; history -r${PROMPT_COMMAND:+; $PROMPT_COMMAND}"
+
+### direnv (per-directory env loading) ###
 if command -v direnv >/dev/null 2>&1; then
   eval "$(direnv hook bash)"
 fi
@@ -59,14 +50,18 @@ lg() {
 
 ### Aliases ###
 alias ai=claude
-alias eza='eza --icons auto --git --sort=ext --sort=name --group-directories-first'
+alias vi=nvim
+alias vim=nvim
+
+# eza — deliberately overrides Omarchy's `ls`/`lt`. `ls`/`lt` expand through the
+# `eza` alias so the base flags apply to both, and Omarchy's own `lsa`/`lta`
+# (defined as `ls -a` / `lt -a`) inherit them too.
+alias eza='eza --icons auto --git --sort=ext --group-directories-first'
+alias ls=eza
 alias la='eza -a'
 alias ll='eza -l'
 alias lla='eza -la'
-alias ls=eza
 alias lt='eza --tree'
-alias vi=nvim
-alias vim=nvim
 
 ### ble.sh: bash equivalent of zsh-autosuggestions + zsh-syntax-highlighting ###
 # https://github.com/akinomyoga/ble.sh — must be sourced last in .bashrc.
