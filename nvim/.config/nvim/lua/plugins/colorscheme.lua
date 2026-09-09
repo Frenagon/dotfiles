@@ -2,7 +2,7 @@
 -- (see plugins/theme.lua) — e.g. on a machine without Omarchy, or before
 -- Omarchy's theme has been set at least once.
 local has_omarchy_theme =
-	vim.uv.fs_stat(vim.fn.expand("~/.config/omarchy/current/theme/neovim.lua")) ~= nil
+	vim.uv.fs_stat(vim.fn.expand("~/.local/state/omarchy/current/theme/neovim.lua")) ~= nil
 
 return {
 	{
