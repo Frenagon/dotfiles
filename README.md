@@ -15,6 +15,9 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 │   └── .config/
 │       └── git/
 │           └── config           -> ~/.config/git/config
+├── ssh/
+│   └── .ssh/
+│       └── config               -> ~/.ssh/config
 └── nvim/
     └── .config/
         └── nvim/                -> ~/.config/nvim
@@ -85,6 +88,15 @@ Everything else nvim needs (LSP servers, remaining formatters) is self-installed
 mason.nvim on first launch — see `lua/plugins/mason.lua`. Theming follows Omarchy's
 system theme automatically when present (`lua/plugins/theme.lua`); it falls back to a
 bundled catppuccin colorscheme when it isn't (e.g. on a non-Omarchy machine).
+
+**ssh note:** this repo only tracks `~/.ssh/config` — never the private keys
+themselves. After stowing, `ssh` will refuse to use `~/.ssh` or its keys if
+permissions are too open; on a fresh machine run:
+
+```sh
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/id_ed25519   # or whichever key(s) you generate/copy over
+```
 
 ## Adding a new config
 
