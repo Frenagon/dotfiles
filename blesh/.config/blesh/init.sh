@@ -33,6 +33,12 @@ bleopt complete_menu_maxlines=20                 # cap height; default is uncapp
 bleopt complete_menu_complete=1                  # needed to walk the menu with TAB
 ble-face -s menu_complete_selected   'fg=black,bg=blue'   # selected row in the menu
 
+# Omarchy's inputrc sets `menu-complete-display-prefix on`, which makes ble.sh
+# print each candidate's full path in the menu. Turn it back off so the menu
+# lists only the component being completed: `src/lib/<TAB>` shows `parser.c`,
+# not `src/lib/parser.c`.
+bind 'set menu-complete-display-prefix off'
+
 # TAB: 1st press shows the menu with nothing selected and nothing inserted;
 # 2nd press steps into the menu and selects the first entry; further presses
 # cycle. (ble.sh's default inserts the first entry on the press that opens the

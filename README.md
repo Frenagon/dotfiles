@@ -136,7 +136,9 @@ aliases (`l`/`ls`/`la`/`ll`/`lla`/`lt`) deliberately override Omarchy's own
 the zsh setup this config was converted from: zsh-autosuggestions ghost
 text, zsh-syntax-highlighting's green/yellow scheme, and a two-step
 `menu select` TAB (first TAB opens the menu with nothing selected, second
-steps in) with the command line left un-highlighted while the menu is open.
+steps in) with the command line left un-highlighted while the menu is open
+and each path candidate shown as its last component only (it also turns
+`menu-complete-display-prefix` back off, which Omarchy's inputrc enables).
 Colours use palette indices so they follow the terminal theme. Harmless
 without ble.sh — it's just never sourced.
 
