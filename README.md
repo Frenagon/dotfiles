@@ -128,46 +128,6 @@ mason.nvim on first launch — see `lua/plugins/mason.lua`. Theming follows Omar
 system theme automatically when present (`lua/plugins/theme.lua`); it falls back to a
 bundled catppuccin colorscheme when it isn't (e.g. on a non-Omarchy machine).
 
-**bash note:** `.bashrc` is Omarchy's stock `.bashrc` (its `env-bootstrap` +
-`default/bash/rc` chain stay the source of truth for history, prompt, zoxide
-and completions) with a personal section appended for what Omarchy doesn't
-ship: the `~/.local/scripts` PATH entry, cross-pane history sharing, the
-`direnv` hook, `lg()`, the `ai`/`vi`/`vim` aliases, and ble.sh. The eza
-aliases (`l`/`ls`/`la`/`ll`/`lla`/`lt`) deliberately override Omarchy's own
-`ls`/`lt`.
-
-**blesh note:** `blesh/.config/blesh/init.sh` is auto-loaded by ble.sh (no
-`~/.blerc` needed). It makes ble.sh's autosuggestions + completion read like
-the zsh setup this config was converted from: zsh-autosuggestions ghost
-text, zsh-syntax-highlighting's green/yellow scheme, and a two-step
-`menu select` TAB (first TAB opens the menu with nothing selected, second
-steps in) with the command line left un-highlighted while the menu is open
-and each path candidate shown as its last component only (it also turns
-`menu-complete-display-prefix` back off, which Omarchy's inputrc enables).
-Colours use palette indices so they follow the terminal theme. Harmless
-without ble.sh — it's just never sourced.
-
-**starship note:** `~/.config/starship.toml` replaces Omarchy's default (which
-`default/bash/init` still `starship init`s). Changes from it: the prompt is
-multiline (the command line drops to its own row); starship's connective
-words are restored — `on` before the branch, `via` before a language/runtime,
-`took` for a slow command; the git branch gets a Nerd Font glyph
-(`nf-oct-git-branch`, U+F418). The git-status and prompt-character glyphs
-(`❯` / `✗`, `` / `` / …) are Omarchy's; only its `cyan` recolour is
-dropped, so colours are starship's defaults.
-
-**tmux note:** lives at `~/.config/tmux/tmux.conf` because tmux 3.x prefers
-that path over `~/.tmux.conf` — and Omarchy copies its own config there on a
-fresh install, so a `~/.tmux.conf` symlink would silently never load. This
-file `source-file`s Omarchy's shipped config first and keeps it as the source
-of truth (prefix `C-Space`/`C-b`, terminal features, the pane/window/session
-keybinding set, the theme); the personal section is only the handful of lines
-that differ: 24h clock, `s` sorts the tree by name, a bottom status bar
-showing command + session, and the TPM plugin set (sensible, resurrect,
-continuum, agent-sidebar). TPM lives at `~/.config/tmux/plugins/tpm`. No
-shell auto-attach — start tmux yourself (Omarchy's `t` alias, or the
-tmux-launch keybinds).
-
 **hypr note:** targets Omarchy's "Quattro" (v4.0.0+) Hyprland setup, where
 `~/.config/hypr/{hyprland,bindings,monitors,input,looknfeel,autostart}.lua`
 are Omarchy's own blessed user-override files — loaded *after* Omarchy's real
