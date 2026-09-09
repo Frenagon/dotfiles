@@ -143,12 +143,14 @@ without ble.sh — it's just never sourced.
 **tmux note:** lives at `~/.config/tmux/tmux.conf` because tmux 3.x prefers
 that path over `~/.tmux.conf` — and Omarchy copies its own config there on a
 fresh install, so a `~/.tmux.conf` symlink would silently never load. This
-file `source-file`s Omarchy's shipped config first (keeping its terminal
-features and its large pane/window/session keybinding set) then overrides:
-prefix `C-a` (no second prefix), a bottom status bar styled from the palette,
-and TPM plugins (sensible, resurrect, continuum, agent-sidebar). TPM lives at
-`~/.config/tmux/plugins/tpm`. No shell auto-attach — start tmux yourself
-(Omarchy's `t` alias, or the tmux-launch keybinds).
+file `source-file`s Omarchy's shipped config first and keeps it as the source
+of truth (prefix `C-Space`/`C-b`, terminal features, the pane/window/session
+keybinding set, the theme); the personal section is only the handful of lines
+that differ: 24h clock, `s` sorts the tree by name, a bottom status bar
+showing command + session, and the TPM plugin set (sensible, resurrect,
+continuum, agent-sidebar). TPM lives at `~/.config/tmux/plugins/tpm`. No
+shell auto-attach — start tmux yourself (Omarchy's `t` alias, or the
+tmux-launch keybinds).
 
 **hypr note:** targets Omarchy's "Quattro" (v4.0.0+) Hyprland setup, where
 `~/.config/hypr/{hyprland,bindings,monitors,input,looknfeel,autostart}.lua`
