@@ -1,0 +1,42 @@
+# Plastik Genesis — dark variant, ported from the caelestia "crimson" scheme
+# (~/.nixos-config/home/window-managers/caelestia/schemes/crimson/dark.txt).
+#
+# accent/red/bright_red   <- primary / term1
+# yellow/bright_yellow    <- secondary / term4
+# green/bright_green      <- term2
+# blue/bright_blue        <- tertiary / term3
+# orange, cyan, magenta, brown are derived blends (crimson only defines four
+# distinct hues: red/amber/blue/green); bright_* mirror their base value,
+# same as the source scheme itself (its term/bright slots are identical).
+
+mode = "dark"
+
+accent = "#D96A62"
+selection = "#2A2A2A"
+muted = "#7C7C7C"
+
+background = "#272727"
+dark_background = "#1E1E1E"
+darker_background = "#171717"
+lighter_background = "#3A3A3A"
+
+foreground = "#CCCCCC"
+dark_foreground = "#565656"
+light_foreground = "#F0F0F0"
+bright_foreground = "#FFFFFF"
+
+red = "#D96A62"
+yellow = "#CCA056"
+orange = "#D2855C"
+green = "#78CCA1"
+cyan = "#7AB8D0"
+blue = "#7DA3FF"
+magenta = "#AB86B0"
+brown = "#7A6034"
+
+bright_red = "#D96A62"
+bright_yellow = "#CCA056"
+bright_green = "#78CCA1"
+bright_cyan = "#7AB8D0"
+bright_blue = "#7DA3FF"
+bright_magenta = "#AB86B0"

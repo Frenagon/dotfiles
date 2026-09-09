@@ -1,0 +1,40 @@
+# Plastik Odyssey — light variant, ported from the caelestia "crimson" scheme
+# (~/.nixos-config/home/window-managers/caelestia/schemes/crimson/light.txt).
+#
+# Foreground ramp reads lightest-to-darkest per Omarchy's light-mode
+# convention (dark_foreground is the *lightest*/least-emphasis tone here,
+# bright_foreground the darkest/highest-contrast — the ramp position keeps
+# its name, but for light mode "brightest" means highest contrast, i.e.
+# darkest ink), mirroring plastik-genesis's dark-mode ramp direction.
+
+mode = "light"
+
+accent = "#C24A42"
+selection = "#E8E8E8"
+muted = "#8A8A8A"
+
+background = "#FAFAFA"
+dark_background = "#F2F2F2"
+darker_background = "#EAEAEA"
+lighter_background = "#FFFFFF"
+
+foreground = "#484848"
+dark_foreground = "#B0B0B0"
+light_foreground = "#1A1A1A"
+bright_foreground = "#000000"
+
+red = "#C24A42"
+yellow = "#A5771F"
+orange = "#B46030"
+green = "#2E9A5E"
+cyan = "#2E7C9F"
+blue = "#2F5FE0"
+magenta = "#785491"
+brown = "#7C5917"
+
+bright_red = "#C24A42"
+bright_yellow = "#A5771F"
+bright_green = "#2E9A5E"
+bright_cyan = "#2E7C9F"
+bright_blue = "#2F5FE0"
+bright_magenta = "#785491"

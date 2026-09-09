@@ -34,10 +34,17 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 │           ├── monitors.lua, input.lua, bindings.lua, rules.lua
 │           ├── autostart.lua, variables.lua
 │           └── programs/obsidian.lua
-└── scripts/
-    └── .local/
-        └── scripts/
-            └── run_if_closed    -> ~/.local/scripts/run_if_closed
+├── scripts/
+│   └── .local/
+│       └── scripts/
+│           └── run_if_closed    -> ~/.local/scripts/run_if_closed
+└── omarchy/
+    └── .config/
+        └── omarchy/
+            └── themes/          -> ~/.config/omarchy/themes
+                ├── plastik-genesis/colors.toml
+                ├── plastik-retro/colors.toml
+                └── plastik-odyssey/colors.toml
 ```
 
 ## Usage
@@ -112,6 +119,18 @@ clipboard/launcher/powermenu/lock/kb-layout/bluetooth), and ships no
 `looknfeel.lua`, leaving Omarchy's default look-and-feel untouched. Untested
 against a real Omarchy install — smoke test with `hyprctl reload` and watch
 for Lua errors after stowing.
+
+**omarchy note:** three custom Omarchy themes ("Plastik" family) ported from
+this machine's caelestia "crimson" color scheme
+(`~/.nixos-config/home/window-managers/caelestia/schemes/crimson/`) —
+`plastik-genesis` (dark, from `crimson/dark.txt`), `plastik-odyssey` (light,
+from `crimson/light.txt`), and `plastik-retro` (a mid warm-gray variant not
+in the source scheme, built around the same four accent hues). Each is just
+a `colors.toml` — Omarchy's own templates generate every themed app config
+(terminal, Hyprland borders, btop, etc.) from it; see
+[docs/theming.md](https://github.com/omacom/omarchy/blob/quattro/docs/theming.md)
+for the schema. Activate with `omarchy-theme-set plastik-genesis` (or
+`-retro`/`-odyssey`) after stowing. Untested against a real Omarchy install.
 
 **ssh note:** this repo only tracks `~/.ssh/config` — never the private keys
 themselves. After stowing, `ssh` will refuse to use `~/.ssh` or its keys if

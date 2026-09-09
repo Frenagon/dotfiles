@@ -1,0 +1,38 @@
+# Plastik Retro — a mid-gray "retro plastic" variant, not from either of
+# crimson's dark/light scheme files directly: same four accent hues as
+# plastik-genesis/plastik-odyssey (ties the family together), built around a
+# new warm mid-gray background/foreground ramp reminiscent of old beige/gray
+# plastic computer cases, computed as blends toward black/white from a
+# #6E655C base rather than pulled from a source palette.
+
+mode = "dark"
+
+accent = "#D96A62"
+selection = "#7F7770"
+muted = "#ABA6A0"
+
+background = "#6E655C"
+dark_background = "#4D4740"
+darker_background = "#312D29"
+lighter_background = "#8E8780"
+
+foreground = "#C8C4C1"
+dark_foreground = "#A19B95"
+light_foreground = "#E5E3E2"
+bright_foreground = "#FFFFFF"
+
+red = "#D96A62"
+yellow = "#CCA056"
+orange = "#D2855C"
+green = "#78CCA1"
+cyan = "#7AB8D0"
+blue = "#7DA3FF"
+magenta = "#AB86B0"
+brown = "#7A6034"
+
+bright_red = "#D96A62"
+bright_yellow = "#CCA056"
+bright_green = "#78CCA1"
+bright_cyan = "#7AB8D0"
+bright_blue = "#7DA3FF"
+bright_magenta = "#AB86B0"
