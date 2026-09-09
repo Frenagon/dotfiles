@@ -4,16 +4,18 @@
 # machine's shell was converted from — zsh-autosuggestions,
 # zsh-syntax-highlighting, and `zstyle ':completion:*' menu select`.
 #
-# ble.sh's *behaviour* already matches zsh out of the box, so nothing to do
-# there:
-#   - auto-complete "ghost text" is on and near-instant (complete_auto_delay=1)
-#   - TAB shows an inline, filter-as-you-type menu and cycles through it with
-#     the current entry highlighted (complete_menu_complete=1,
-#     complete_menu_filter=1, menu_complete_selected=reverse)
-#   - suggestion accept keys already match zsh-autosuggestions: End / Right /
-#     C-e take the whole line, M-f / C-Right take one word
+# ble.sh's *behaviour* is already close: auto-complete "ghost text" is on and
+# near-instant (complete_auto_delay=1), the completion menu is inline and
+# filter-as-you-type, and the suggestion accept keys already match
+# zsh-autosuggestions (End / Right / C-e = whole line, M-f / C-Right = word).
 #
-# What's left is a palette remap: ble.sh's defaults use a red/blue/pink scheme
+# Two things are changed below the palette:
+#   - TAB shows the menu without selecting/inserting anything; you step into it
+#     with a second TAB (zsh `menu select` without MENU_COMPLETE)
+#   - the command line keeps its normal colours while the menu is open — no
+#     insert-region or filter highlight painted onto the prompt
+#
+# The rest is a palette remap: ble.sh's defaults use a red/blue/pink scheme
 # that reads very differently from zsh-syntax-highlighting's green/yellow one,
 # and the autosuggestion is drawn as a grey box rather than dim ghost text.
 #
@@ -28,8 +30,28 @@ ble-face -s auto_complete            'fg=8'
 
 ## ── Completion menu (zsh menu-select) ─────────────────────────────────────
 bleopt complete_menu_maxlines=20                 # cap height; default is uncapped
-ble-face -s menu_complete_selected   'fg=black,bg=blue'   # like complist's ma=
-ble-face -s menu_filter_input        'fg=black,bg=blue'   # the typed filter
+bleopt complete_menu_complete=1                  # needed to walk the menu with TAB
+ble-face -s menu_complete_selected   'fg=black,bg=blue'   # selected row in the menu
+
+# TAB: 1st press shows the menu with nothing selected and nothing inserted;
+# 2nd press steps into the menu and selects the first entry; further presses
+# cycle. (ble.sh's default inserts the first entry on the press that opens the
+# menu — this splits that into two steps, like zsh's `menu select`.)
+function ble/widget/tab-complete-menu {
+  if [[ $_ble_complete_menu_active ]]; then
+    ble/widget/menu-complete
+  else
+    ble/widget/complete show_menu
+  fi
+}
+ble-bind -f 'C-i' 'tab-complete-menu'
+ble-bind -f 'TAB' 'tab-complete-menu'
+
+# Keep the command line looking exactly as it does with no menu open: don't
+# paint the inserted entry or the filter text with a highlight.
+ble-face -s region_insert     none   # the entry inserted while walking the menu
+ble-face -s menu_filter_fixed  none   # the already-matched prefix on the prompt
+ble-face -s menu_filter_input  none   # extra characters typed to narrow the menu
 
 ## ── Syntax highlighting (zsh-syntax-highlighting palette) ─────────────────
 # Command words: all green — builtin / function / alias / external / `.`.

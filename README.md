@@ -130,12 +130,13 @@ aliases (`l`/`ls`/`la`/`ll`/`lla`/`lt`) deliberately override Omarchy's own
 `ls`/`lt`.
 
 **blesh note:** `blesh/.config/blesh/init.sh` is auto-loaded by ble.sh (no
-`~/.blerc` needed). It's purely a palette/behaviour tweak to make ble.sh's
-autosuggestions + completion menu read like the zsh setup this config was
-converted from (zsh-autosuggestions ghost text, zsh-syntax-highlighting's
-green/yellow scheme, `menu select`-style highlighting). Colours use palette
-indices so they follow the terminal theme. Harmless without ble.sh — it's
-just never sourced.
+`~/.blerc` needed). It makes ble.sh's autosuggestions + completion read like
+the zsh setup this config was converted from: zsh-autosuggestions ghost
+text, zsh-syntax-highlighting's green/yellow scheme, and a two-step
+`menu select` TAB (first TAB opens the menu with nothing selected, second
+steps in) with the command line left un-highlighted while the menu is open.
+Colours use palette indices so they follow the terminal theme. Harmless
+without ble.sh — it's just never sourced.
 
 **hypr note:** targets Omarchy's "Quattro" (v4.0.0+) Hyprland setup, where
 `~/.config/hypr/{hyprland,bindings,monitors,input,looknfeel,autostart}.lua`
