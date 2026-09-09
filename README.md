@@ -152,8 +152,9 @@ without ble.sh — it's just never sourced.
 multiline (the command line drops to its own row); starship's connective
 words are restored — `on` before the branch, `via` before a language/runtime,
 `took` for a slow command; the git branch gets a Nerd Font glyph
-(`nf-oct-git-branch`, U+F418). Colours are left at starship's defaults —
-Omarchy's config recoloured everything `cyan`, this doesn't.
+(`nf-oct-git-branch`, U+F418). The git-status and prompt-character glyphs
+(`❯` / `✗`, `` / `` / …) are Omarchy's; only its `cyan` recolour is
+dropped, so colours are starship's defaults.
 
 **tmux note:** lives at `~/.config/tmux/tmux.conf` because tmux 3.x prefers
 that path over `~/.tmux.conf` — and Omarchy copies its own config there on a
