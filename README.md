@@ -103,7 +103,7 @@ loudly until installed.
 | `bat` | `bat` | yes | the tool itself |
 | `bash` | `starship` | optional | prompt (Omarchy's `default/bash/init` runs `starship init`) |
 | `starship` | `starship` | yes | the prompt config is inert without it |
-| `starship` | a Nerd Font | yes | the folder / branch / lock glyphs (Omarchy's default font has one) |
+| `starship` | a Nerd Font | yes | the git-branch glyph and the language-module glyphs (Omarchy's default font has one) |
 | `bash` | `zoxide` | optional | smarter `cd` |
 | `bash` | `direnv` | optional | per-directory env loading |
 | `bash` | `lazygit` | optional | used by the `lg` function |
@@ -148,10 +148,13 @@ Colours use palette indices so they follow the terminal theme. Harmless
 without ble.sh — it's just never sourced.
 
 **starship note:** `~/.config/starship.toml` replaces Omarchy's default (which
-`default/bash/init` still `starship init`s). Same modules as Omarchy's —
-directory + git — with two changes: the prompt is multiline so the command
-line sits on its own row, and directory / branch / read-only get Nerd Font
-glyphs. `cyan` follows the terminal theme.
+`default/bash/init` still `starship init`s). Changes from it: the prompt is
+multiline (the command line drops to its own row); starship's connective
+words are restored — `on` before the branch, `via` before a language/runtime,
+`took` for a slow command; the git branch gets a Nerd Font glyph (nothing
+else does — language modules keep their own default glyph). `nodejs` /
+`python` / `rust` / `golang` / `lua` / `cmd_duration` are re-themed `cyan` to
+match; `cyan` follows the terminal theme.
 
 **tmux note:** lives at `~/.config/tmux/tmux.conf` because tmux 3.x prefers
 that path over `~/.tmux.conf` — and Omarchy copies its own config there on a
