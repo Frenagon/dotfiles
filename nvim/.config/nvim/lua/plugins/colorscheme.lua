@@ -1,16 +1,16 @@
--- Only auto-apply catppuccin when Omarchy hasn't provided its own theme spec
--- (see plugins/theme.lua) — e.g. on a machine without Omarchy, or before
--- Omarchy's theme has been set at least once.
-local has_omarchy_theme =
-	vim.uv.fs_stat(vim.fn.expand("~/.local/state/omarchy/current/theme/neovim.lua")) ~= nil
+-- catppuccin is the fallback colorscheme: it loads non-lazily but only applies
+-- itself if nothing else has (see plugins/theme.lua, which paints the Omarchy
+-- system theme at priority 900). So it takes over on a machine without Omarchy,
+-- before a theme has been set, or if the Omarchy theme spec is unreadable —
+-- without fighting theme.lua when that succeeds.
 
 return {
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
 		enabled = true,
-		priority = 1000,
-		lazy = has_omarchy_theme,
+		lazy = false,
+		priority = 800,
 		opts = {
 			flavour = "macchiato",
 			integrations = {
@@ -81,7 +81,7 @@ return {
 		},
 		config = function(_, opts)
 			require("catppuccin").setup(opts)
-			if not has_omarchy_theme then
+			if not vim.g.colors_name then
 				vim.cmd.colorscheme("catppuccin")
 			end
 		end,
