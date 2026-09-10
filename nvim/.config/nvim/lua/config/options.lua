@@ -1,3 +1,7 @@
+-- OSC 52 / Wayland clipboard bridge for tmux and SSH sessions. No-op in a plain
+-- local session, where the `clipboard` option below stays in effect.
+require("config.remote_clipboard").setup()
+
 vim.g.border_style = "rounded" ---@type "single"|"double"|"rounded"
 
 vim.opt.termguicolors = true
