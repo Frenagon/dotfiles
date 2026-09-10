@@ -385,7 +385,4 @@ alias gwch='git log --patch --abbrev-commit --pretty=medium --raw'
 
 ### ble.sh: bash equivalent of zsh-autosuggestions + zsh-syntax-highlighting ###
 # https://github.com/akinomyoga/ble.sh — must be sourced last in .bashrc.
-# ~/.local/share is the upstream `PREFIX=~/.local` install; /usr/share is the
-# Arch `blesh` package. Source whichever is present (the user path wins).
 [[ -f ~/.local/share/blesh/ble.sh ]] && source ~/.local/share/blesh/ble.sh
-[[ -f /usr/share/blesh/ble.sh     ]] && source /usr/share/blesh/ble.sh
