@@ -47,7 +47,8 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 │       └── hypr/                -> ~/.config/hypr
 │           ├── hyprland.lua
 │           ├── monitors.lua, input.lua, bindings.lua, rules.lua
-│           ├── autostart.lua, variables.lua
+│           ├── autostart.lua, variables.lua, looknfeel.lua
+│           ├── hyprsunset.conf, xdph.conf, .luarc.json
 │           └── programs/obsidian.lua
 ├── scripts/
 │   └── .local/
@@ -131,14 +132,19 @@ bundled catppuccin colorscheme when it isn't (e.g. on a non-Omarchy machine).
 **hypr note:** targets Omarchy's "Quattro" (v4.0.0+) Hyprland setup, where
 `~/.config/hypr/{hyprland,bindings,monitors,input,looknfeel,autostart}.lua`
 are Omarchy's own blessed user-override files — loaded *after* Omarchy's real
-defaults, so this package only adds personal config (monitor layout, input
-devices, app autostart, window-placement rules, one workspace-launch keybind
+defaults, so this package only adds personal config (monitor layout, keyboard
+layout, app autostart, window-placement rules, one workspace-launch keybind
 pattern) on top. It deliberately does not touch or reimplement anything
 Omarchy's own shell already provides (volume/brightness/screenshot/
-clipboard/launcher/powermenu/lock/kb-layout/bluetooth), and ships no
-`looknfeel.lua`, leaving Omarchy's default look-and-feel untouched. Untested
-against a real Omarchy install — smoke test with `hyprctl reload` and watch
-for Lua errors after stowing.
+clipboard/launcher/powermenu/lock/kb-layout/bluetooth). `looknfeel.lua`,
+`hyprsunset.conf`, `xdph.conf`, and `.luarc.json` are tracked as Omarchy
+ships them (all-comment stub / stock defaults) so `stow hypr` covers the
+whole directory — customize `looknfeel.lua` in place when wanted. Since these
+four are stock, this package now shadows Omarchy's copies of them, so an
+Omarchy update to those specific templates won't reach this machine until
+re-synced by hand. Smoke-tested on this machine with `hyprctl reload` —
+`hyprctl configerrors` came back clean and `hyprctl monitors`/`binds`
+reflected the new config.
 
 **omarchy note:** three custom Omarchy themes ("Plastik" family) ported from
 this machine's caelestia "crimson" color scheme
