@@ -47,8 +47,6 @@ return {
 				desc = "Color pick under cursor",
 			},
 		},
-		opts = {
-			auto_download = false,
-		},
+		opts = {},
 	},
 }
