@@ -128,6 +128,8 @@ loudly until installed.
 | `nvim` | `curl`/`wget`, `unzip`, `tar`, `gzip` | yes | mason's own download prerequisites (present on a base Arch/Omarchy install) |
 | `scripts` | `jq` | yes | used by `run_if_closed` to query `hyprctl clients -j` |
 | `foot` | `foot` | yes | the terminal itself |
+| `hypr` | [`ytmdesktop`](https://aur.archlinux.org/packages/ytmdesktop) (AUR) | yes | installs as `youtube-music-desktop-app`; autostarted on workspace 5 and bound to `SUPER+5` |
+| `hypr` | `godot` | yes | bound to `SUPER+6`, workspace 6 |
 
 Everything else nvim needs (LSP servers, remaining formatters) is self-installed by
 mason.nvim on first launch — see `lua/plugins/mason.lua`. Theming follows Omarchy's

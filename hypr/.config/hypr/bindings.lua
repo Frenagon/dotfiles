@@ -40,3 +40,7 @@ hl.bind(
 )
 hl.bind(mainMod .. " + 5", hl.dsp.exec_cmd(run_if_closed .. " --title '" .. musicTitle .. "' --regex --workspace 5 -- " .. music))
 hl.bind(mainMod .. " + 6", hl.dsp.exec_cmd(run_if_closed .. " --class 'Godot' --workspace 6 -- godot"))
+
+-- The silvaio.gamemode bar plugin (~/.config/omarchy/plugins/silvaio.gamemode)
+-- doesn't wire up a keybind itself; its README says to add this.
+o.bind(mainMod .. " + CTRL + G", "Game Mode", "omarchy-shell silvaio.gamemode toggleMode")
