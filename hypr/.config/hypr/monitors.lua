@@ -3,7 +3,7 @@ local builtInMonitorOptions = {
 	disabled = false,
 	mode = "preferred",
 	position = "auto",
-	scale = "1.875",
+	scale = "2",
 }
 
 hl.monitor(builtInMonitorOptions)
