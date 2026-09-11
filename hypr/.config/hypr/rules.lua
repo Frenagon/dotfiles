@@ -13,7 +13,7 @@ hl.window_rule({
 		class = ".*(obsidian|electron).*",
 		title = "negative:.*(Campaign Notes|D&D 5E)" .. obsidian.title,
 	},
-	workspace = "3",
+	workspace = "3 silent",
 })
 
 hl.window_rule({
@@ -22,7 +22,7 @@ hl.window_rule({
 		class = ".*(obsidian|electron).*",
 		title = ".*(Campaign Notes|D&D 5E)" .. obsidian.title,
 	},
-	workspace = "4",
+	workspace = "4 silent",
 })
 
 hl.window_rule({
@@ -30,7 +30,7 @@ hl.window_rule({
 	match = {
 		title = musicTitle,
 	},
-	workspace = "5",
+	workspace = "5 silent",
 })
 
 hl.window_rule({
