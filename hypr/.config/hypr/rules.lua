@@ -3,10 +3,14 @@ local obsidian = require("hypr.programs.obsidian")
 
 local musicTitle = vars.musicTitle
 
+-- Hyprland matches class/title with a full-string regex (RE2::FullMatch), so
+-- patterns need their own leading/trailing ".*" to match a substring. Obsidian's
+-- actual window class is "md.obsidian.Obsidian", which "obsidian|electron"
+-- (unwrapped) never fully matches.
 hl.window_rule({
 	name = "obsidian-notes-workspace",
 	match = {
-		class = "obsidian|electron",
+		class = ".*(obsidian|electron).*",
 		title = "negative:.*(Campaign Notes|D&D 5E)" .. obsidian.title,
 	},
 	workspace = "3",
@@ -15,7 +19,7 @@ hl.window_rule({
 hl.window_rule({
 	name = "obsidian-games-workspace",
 	match = {
-		class = "obsidian|electron",
+		class = ".*(obsidian|electron).*",
 		title = ".*(Campaign Notes|D&D 5E)" .. obsidian.title,
 	},
 	workspace = "4",
