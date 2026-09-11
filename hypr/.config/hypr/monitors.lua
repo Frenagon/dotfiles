@@ -106,12 +106,15 @@ if hostname == "AdaLaptop" then
 	end)
 elseif hostname == "Ada" then
 	-- DP-1 logical size is 3440/1.25 x 1440/1.25 = 2752x1152.
+	-- 10-bit framebuffer so HDR passthrough (cm_auto_hdr below) doesn't
+	-- get tone-mapped down to 8-bit and band.
 	hl.monitor({
 		output = "DP-1",
 		disabled = false,
 		mode = "3440x1440@180",
 		position = "0x0",
 		scale = "1.25",
+		bitdepth = 10,
 	})
 
 	-- Placed to the right of DP-1, vertically centered against its
@@ -122,6 +125,7 @@ elseif hostname == "Ada" then
 		mode = "3840x2160@120",
 		position = "2752x-504",
 		scale = "1",
+		bitdepth = 10,
 	})
 end
 
