@@ -54,6 +54,10 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 │   └── .local/
 │       └── scripts/
 │           └── run_if_closed    -> ~/.local/scripts/run_if_closed
+├── foot/
+│   └── .config/
+│       └── foot/
+│           └── foot.ini         -> ~/.config/foot/foot.ini
 └── omarchy/
     └── .config/
         └── omarchy/
@@ -123,6 +127,7 @@ loudly until installed.
 | `nvim` | Python3 + pip | yes | the `black` formatter, installed by mason |
 | `nvim` | `curl`/`wget`, `unzip`, `tar`, `gzip` | yes | mason's own download prerequisites (present on a base Arch/Omarchy install) |
 | `scripts` | `jq` | yes | used by `run_if_closed` to query `hyprctl clients -j` |
+| `foot` | `foot` | yes | the terminal itself |
 
 Everything else nvim needs (LSP servers, remaining formatters) is self-installed by
 mason.nvim on first launch — see `lua/plugins/mason.lua`. Theming follows Omarchy's
