@@ -14,6 +14,7 @@ hl.window_rule({
 		title = "negative:.*(Campaign Notes|D&D 5E)" .. obsidian.title,
 	},
 	workspace = "3 silent",
+	focus_on_activate = false,
 })
 
 hl.window_rule({
@@ -23,6 +24,7 @@ hl.window_rule({
 		title = ".*(Campaign Notes|D&D 5E)" .. obsidian.title,
 	},
 	workspace = "4 silent",
+	focus_on_activate = false,
 })
 
 hl.window_rule({
@@ -31,6 +33,7 @@ hl.window_rule({
 		title = musicTitle,
 	},
 	workspace = "5 silent",
+	focus_on_activate = false,
 })
 
 hl.window_rule({
