@@ -14,16 +14,20 @@
 -- })
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#decoration
--- hl.config({
---   decoration = {
---     -- Use round window corners.
---     rounding = 8,
---
---     -- Dim unfocused windows (0.0 = no dim, 1.0 = fully dimmed).
---     dim_inactive = true,
---     dim_strength = 0.15,
---   },
--- })
+-- Most themes don't set their own corner radius, so this default applies to
+-- all of them. It matches the Solitude theme's rounding (loaded here rather
+-- than left theme-specific, since this file loads after the active theme's
+-- overrides).
+hl.config({
+  decoration = {
+    rounding = 6,
+    rounding_power = 3,
+
+    -- Dim unfocused windows (0.0 = no dim, 1.0 = fully dimmed).
+    -- dim_inactive = true,
+    -- dim_strength = 0.15,
+  },
+})
 
 -- https://wiki.hypr.land/Configuring/Basics/Variables/#animations
 -- hl.config({
