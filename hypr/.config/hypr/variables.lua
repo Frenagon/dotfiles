@@ -1,9 +1,10 @@
-local terminal = "foot"
+local terminal = "ghostty"
 
 return {
 	-- Apps
 	terminal      = terminal,
-	terminalClass = terminal,
+	-- ghostty's GTK app-id is "com.mitchellh.ghostty", not the binary name.
+	terminalClass = "com.mitchellh.ghostty",
 	browser       = "zen-browser",
 	-- Window class for `run_if_closed --class`. zen-browser-bin ships
 	-- StartupWMClass=zen; confirm against `hyprctl clients` if SUPER+1 keeps
