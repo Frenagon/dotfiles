@@ -58,6 +58,10 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 │   └── .config/
 │       └── foot/
 │           └── foot.ini         -> ~/.config/foot/foot.ini
+├── ghostty/
+│   └── .config/
+│       └── ghostty/
+│           └── config           -> ~/.config/ghostty/config
 └── omarchy/
     └── .config/
         └── omarchy/
@@ -128,6 +132,7 @@ loudly until installed.
 | `nvim` | `curl`/`wget`, `unzip`, `tar`, `gzip` | yes | mason's own download prerequisites (present on a base Arch/Omarchy install) |
 | `scripts` | `jq` | yes | used by `run_if_closed` to query `hyprctl clients -j` |
 | `foot` | `foot` | yes | the terminal itself |
+| `ghostty` | `ghostty` | yes | the terminal itself |
 | `hypr` | [`ytmdesktop`](https://aur.archlinux.org/packages/ytmdesktop) (AUR) | yes | installs as `youtube-music-desktop-app`; autostarted on workspace 5 and bound to `SUPER+5` |
 | `hypr` | `godot` | yes | bound to `SUPER+6`, workspace 6 |
 
