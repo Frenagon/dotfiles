@@ -2,7 +2,6 @@ local vars = require("hypr.variables")
 local obsidian = require("hypr.programs.obsidian")
 
 local mainMod = vars.mainMod
-local terminal = vars.terminal
 local terminalClass = vars.terminalClass
 local browser = vars.browser
 local browserClass = vars.browserClass
@@ -15,7 +14,7 @@ local run_if_closed = vars.run_if_closed
 -- own defaults already bind SUPER+<number> to switch workspaces; these add
 -- to that (not replace it) so the first press also launches the app.
 hl.bind(mainMod .. " + 1", hl.dsp.exec_cmd(run_if_closed .. " --class '" .. browserClass .. "' --workspace 1 -- " .. browser))
-hl.bind(mainMod .. " + 2", hl.dsp.exec_cmd(run_if_closed .. " --class '" .. terminalClass .. "' --workspace 2 -- " .. terminal))
+hl.bind(mainMod .. " + 2", hl.dsp.exec_cmd(run_if_closed .. " --class '" .. terminalClass .. "' --workspace 2 -- omarchy-launch-terminal-tmux"))
 hl.bind(
 	mainMod .. " + 3",
 	hl.dsp.exec_cmd(

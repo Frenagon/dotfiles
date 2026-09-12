@@ -1,9 +1,7 @@
-local terminal = "ghostty"
-
 return {
 	-- Apps
-	terminal      = terminal,
-	-- ghostty's GTK app-id is "com.mitchellh.ghostty", not the binary name.
+	-- Window class of whatever terminal xdg-terminal-exec resolves to
+	-- (ghostty's GTK app-id is "com.mitchellh.ghostty", not the binary name).
 	terminalClass = "com.mitchellh.ghostty",
 	browser       = "zen-browser",
 	-- Window class for `run_if_closed --class`. zen-browser-bin ships
