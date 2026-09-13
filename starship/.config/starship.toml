@@ -10,6 +10,7 @@ add_newline = true
 command_timeout = 200
 format = """
 $directory\
+$nix_shell\
 $git_branch\
 $git_status\
 $nodejs\
@@ -27,6 +28,11 @@ error_symbol = "[✗](bold red)"
 [directory]
 truncation_length = 2
 truncation_symbol = ""
+
+[nix_shell]
+disabled = false
+format = "via [$symbol$state( \\($name\\))]($style) "
+symbol = " "
 
 [git_branch]
 format = "on [$symbol$branch]($style) "
