@@ -47,63 +47,60 @@ if hostname == "AdaLaptop" then
 	hl.monitor(merge_dictionaries({ output = "DP-1" }, externalMonitorOptions))
 	hl.monitor(merge_dictionaries({ output = "DP-3" }, externalMonitorOptions))
 
-	-- Helper function to read the lid state
-	local function get_lid_state()
-		local file = io.open("/proc/acpi/button/lid/LID0/state", "r")
-		if not file then
-			-- Try alternate LID node if LID0 doesn't exist
-			file = io.open("/proc/acpi/button/lid/LID/state", "r")
-		end
+	-- switch:on/off:Lid Switch handling removed: Omarchy's own default binding
+	-- (omarchy-hyprland-monitor-clamshell) already covers the lid-switch
+	-- transition, and both were firing on every lid event.
 
-		if file then
-			local content = file:read("*all")
-			file:close()
-			-- Content typically looks like "state: open" or "state: closed"
-			if content:match("closed") then
-				return "closed"
-			else
-				return "open"
-			end
-		end
-		return "unknown"
-	end
-
-	-- Monitor event handling
-	hl.bind("switch:on:Lid Switch", function()
-		if #hl.get_monitors() > 1 then
-			hl.monitor({ output = "eDP-1", disabled = true })
-		end
-	end, { locked = true })
-
-	hl.bind("switch:off:Lid Switch", function()
-		hl.monitor(builtInMonitorOptions)
-	end, { locked = true })
-
-	hl.on("monitor.added", function()
-		if get_lid_state() == "closed" and #hl.get_monitors() > 1 then
-			hl.monitor({ output = "eDP-1", disabled = true })
-		end
-	end)
-
-	hl.on("monitor.removed", function()
-		local externalCount = 0
-
-		for _, m in ipairs(hl.get_monitors()) do
-			if m.name ~= "eDP-1" then
-				externalCount = externalCount + 1
-			end
-		end
-
-		if externalCount == 0 then
-			hl.monitor(builtInMonitorOptions)
-		end
-	end)
-
-	hl.on("config.reloaded", function()
-		if get_lid_state() == "closed" and #hl.get_monitors() > 1 then
-			hl.monitor({ output = "eDP-1", disabled = true })
-		end
-	end)
+	-- Testing Omarchy's default clamshell handling before re-enabling this.
+	-- It only reacts to the lid switch itself, not monitor hotplug while the
+	-- lid stays closed -- these hooks covered that gap.
+	--
+	-- -- Helper function to read the lid state
+	-- local function get_lid_state()
+	-- 	local file = io.open("/proc/acpi/button/lid/LID0/state", "r")
+	-- 	if not file then
+	-- 		-- Try alternate LID node if LID0 doesn't exist
+	-- 		file = io.open("/proc/acpi/button/lid/LID/state", "r")
+	-- 	end
+	--
+	-- 	if file then
+	-- 		local content = file:read("*all")
+	-- 		file:close()
+	-- 		-- Content typically looks like "state: open" or "state: closed"
+	-- 		if content:match("closed") then
+	-- 			return "closed"
+	-- 		else
+	-- 			return "open"
+	-- 		end
+	-- 	end
+	-- 	return "unknown"
+	-- end
+	--
+	-- hl.on("monitor.added", function()
+	-- 	if get_lid_state() == "closed" and #hl.get_monitors() > 1 then
+	-- 		hl.monitor({ output = "eDP-1", disabled = true })
+	-- 	end
+	-- end)
+	--
+	-- hl.on("monitor.removed", function()
+	-- 	local externalCount = 0
+	--
+	-- 	for _, m in ipairs(hl.get_monitors()) do
+	-- 		if m.name ~= "eDP-1" then
+	-- 			externalCount = externalCount + 1
+	-- 		end
+	-- 	end
+	--
+	-- 	if externalCount == 0 then
+	-- 		hl.monitor(builtInMonitorOptions)
+	-- 	end
+	-- end)
+	--
+	-- hl.on("config.reloaded", function()
+	-- 	if get_lid_state() == "closed" and #hl.get_monitors() > 1 then
+	-- 		hl.monitor({ output = "eDP-1", disabled = true })
+	-- 	end
+	-- end)
 elseif hostname == "Ada" then
 	-- DP-1 logical size is 3440/1.25 x 1440/1.25 = 2752x1152.
 	-- 10-bit framebuffer so HDR passthrough (cm_auto_hdr below) doesn't
