@@ -53,7 +53,8 @@ structure mirrors your home directory. Stow symlinks the contents into `~`.
 ├── scripts/
 │   └── .local/
 │       └── scripts/
-│           └── run_if_closed    -> ~/.local/scripts/run_if_closed
+│           ├── run_if_closed                -> ~/.local/scripts/run_if_closed
+│           └── omarchy-launch-terminal-tmux  -> ~/.local/scripts/omarchy-launch-terminal-tmux
 ├── foot/
 │   └── .config/
 │       └── foot/

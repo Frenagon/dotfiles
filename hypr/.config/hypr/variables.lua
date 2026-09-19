@@ -12,11 +12,11 @@ return {
 	music         = "youtube-music-desktop-app",
 	musicTitle    = ".*YouTube Music.*",
 
-	-- Hyprland spawns commands with its own compositor environment, not an
-	-- interactive shell's PATH, so ~/.local/scripts (only added to PATH by
-	-- .bashrc) isn't on it. Shared here so both bindings.lua and
-	-- autostart.lua can guard a launch with it.
+	-- Full paths: Hyprland's compositor environment doesn't have
+	-- ~/.local/scripts on PATH (only .bashrc adds it), so a bare name here
+	-- would resolve to the wrong binary.
 	run_if_closed = os.getenv("HOME") .. "/.local/scripts/run_if_closed",
+	terminalTmux = os.getenv("HOME") .. "/.local/scripts/omarchy-launch-terminal-tmux",
 
 	-- Modifier
 	mainMod       = "SUPER",

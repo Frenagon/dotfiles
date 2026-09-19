@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec omarchy-launch-terminal bash -c "tmux attach || tmux new-session"
