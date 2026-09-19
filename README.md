@@ -127,6 +127,7 @@ loudly until installed.
 | `nvim` | `nvim` | yes | the editor itself |
 | `nvim` | `git` | yes | lazy.nvim and mason.nvim both shell out to it |
 | `nvim` | a C compiler / `make` | yes | `:TSUpdate` treesitter parser builds, telescope-fzf-native's native build |
+| `nvim` | [`tree-sitter` CLI](https://github.com/tree-sitter/tree-sitter/tree/master/crates/cli) | yes | used by nvim-treesitter's `:TSUpdate`/`install()` to build parsers |
 | `nvim` | `cargo`/`rustc` | yes | blink.cmp's `cargo build --release` |
 | `nvim` | Node.js/npm | yes | most mason-installed LSP servers are npm packages |
 | `nvim` | Python3 + pip | yes | the `black` formatter, installed by mason |

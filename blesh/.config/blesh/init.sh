@@ -28,6 +28,13 @@
 # no background; fg=8 is bright-black, zsh-autosuggestions' own default.
 ble-face -s auto_complete            'fg=8'
 
+# ble.sh's ghost text defaults to suggesting from both shell history and live
+# syntax completion (_ble_complete_auto_source=(history syntax)); zsh-
+# autosuggestions only ever suggests from history, which is what this is
+# meant to feel like. The array is reset when core-complete.sh loads, so it
+# must be set from a complete-load hook rather than directly here.
+blehook/eval-after-load complete '_ble_complete_auto_source=(history)'
+
 ## ── Completion menu (zsh menu-select) ─────────────────────────────────────
 bleopt complete_menu_maxlines=20                 # cap height; default is uncapped
 bleopt complete_menu_complete=1                  # needed to walk the menu with TAB
